@@ -107,6 +107,21 @@ class Scan {
     }
   }
 
+  public function __destruct(){
+
+  }
+
+  private $os_name;
+  private $host_name_user_input
+  private $is_IP;
+  private $host_IP_address;
+
+  function main($argc, $argv){
+      $object = new Scan();
+  }
+
+  main($argc, $argv)
+
  
 
 ?>
