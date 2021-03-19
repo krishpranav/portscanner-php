@@ -66,7 +66,46 @@ class Scan {
     }
   }
 
+  private function display_host_information() {
+    if( $this->is_IP == true ) {
+      print "\n";
+      print "\tHost information - \n";
+      print "\tHost name       - ".( string )gethostbyaddr( $this->host_IP_address )."\n";
+      print "\tHost IP address - ".$this->host_IP_address."\n";
+    } elseif( $this->is_IP == false ) {
+      print "\n";
+      print "\tHost information - \n";
+      print "\tHost name       - ".( string )gethostbyaddr( $this->host_IP_address )."\n";
+      print "\tHost IP address - ".$this->host_IP_address."\n";
+      $ip_addresses = gethostbynamel( $this->host_name_user_input );
+      if( $ip_addresses != false ) {
+        if( count( $ip_addresses ) > 1 ) {
+          foreach( $ip_addresses as $key => $value ) {
+            print "\t - ".$value."\n";
+          }
+        }
+      }
+    }
+    print "\n";
+  }
 
+  private function scan() {
+    print "\tscan start port number - ";
+    $start_port_number = ( integer )trim( fgets( STDIN ) );
+    print "\tscan end port number   - ";
+    $end_port_number = ( integer )trim( fgets( STDIN ) );
+    for( $i=$start_port_number; $i<=$end_port_number; $i++ ) {
+      print "\r\t Scanning port - ".$i;
+      $scan_socket = socket_create( AF_INET, SOCK_STREAM, SOL_TCP );
+      $time_out = array( 'sec' => 2, 'usec' => 0 );
+      socket_set_option( $scan_socket, SOL_SOCKET, SO_RCVTIMEO, $time_out );
+      $connected = socket_connect( $scan_socket, $this->host_IP_address, $i );
+      if( $connected == true ) {
+        print "\r\t [ port - ".$i."\t\topen ]\n";
+      }
+      socket_close( $scan_socket );
+    }
+  }
 
  
 
