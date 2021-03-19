@@ -1,9 +1,6 @@
 <?php
 /*
 * A simple programme for scanning ports
-* GitHub - https://github.com/anjanborah/Port_scanner_in_php_simple
-* Author - Anjan Borah < anjanborah@aol.com >
-* Copyright ( c ) 2013 Anjan Borah
 */
 
 error_reporting( 0 );
@@ -65,7 +62,7 @@ class Scan {
       $this->is_IP = false;
     }
   }
-
+  
   private function display_host_information() {
     if( $this->is_IP == true ) {
       print "\n";
@@ -88,7 +85,7 @@ class Scan {
     }
     print "\n";
   }
-
+  
   private function scan() {
     print "\tscan start port number - ";
     $start_port_number = ( integer )trim( fgets( STDIN ) );
@@ -106,22 +103,20 @@ class Scan {
       socket_close( $scan_socket );
     }
   }
-
-  public function __destruct(){
-
+  
+  public function __destruct() {
   }
-
+  
   private $os_name;
-  private $host_name_user_input
+  private $host_name_user_input;
   private $is_IP;
   private $host_IP_address;
+}
 
-  function main($argc, $argv){
-      $object = new Scan();
-  }
+function main( $argc, $argv ) {
+  $object = new Scan();
+}
 
-  main($argc, $argv)
-
- 
+main( $argc, $argv );
 
 ?>
